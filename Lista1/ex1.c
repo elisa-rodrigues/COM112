@@ -37,19 +37,18 @@ int main()
     // Chamada da pesquisa sequencial
     index = linearSearch(vector, searchValue);
 
-    if (index == -1)
-    {
-        printf("\n\n --Valor nao encontrado no vetor!");
-    }
-    else
-    {
+    // Tratamento do retorno da Pesquisa Sequencial
+    if (index == -1)    
+        printf("\n\n --Valor nao encontrado no vetor!");    
+    else    
         printf("\n\n --Valor %d encontrado em Vetor[%d]", searchValue, index + 1);
-    }
-
-    printf("\n\n");
+    
+    printf("\n");
     return 0;
 }
 
+// Função para leitura do Vetor
+// Recebe um vetor como parâmetro
 int readVector(int vet[])
 {
     printf("Leitura do vetor:\n");
@@ -61,6 +60,8 @@ int readVector(int vet[])
     return 0;
 }
 
+// Função para impressão do Vetor
+// Recebe um vetor como parâmetro
 int printVector(int vet[])
 {
     printf("Vetor na memoria:\n");
@@ -69,6 +70,8 @@ int printVector(int vet[])
     return 0;
 }
 
+// Função de Busca Sequencial
+// Recebe um vetor e um valor de pesquisa como parâmetros
 int linearSearch(int v[], int value)
 {
     for (int i = 0; i < vectorSize; i++)
