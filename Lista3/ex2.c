@@ -13,10 +13,11 @@
 
 // Vector Size
 #define vectorSize 10
+#define stringSize 50
 
 // Estrutura para os dados
 typedef struct funcionario{
-    char nome [50];
+    char nome [stringSize];
     float salario;        
 }DadosFuncionario;
 
@@ -25,7 +26,9 @@ typedef struct funcionario{
 int readVector(DadosFuncionario vet[]);
 int printVector(DadosFuncionario vet[]);
 int dummyData(DadosFuncionario vector[]);
-void selectionSort(DadosFuncionario vet[]);
+void selectionSortSalario(DadosFuncionario vet[]);
+void selectionSortNome(DadosFuncionario arr[]);
+
 
 int main()
 {
@@ -39,25 +42,43 @@ int main()
     // Populando o vetor sem necessidade de interação com usuario
     dummyData(vector);
     
-
+    printf("*** SelectionSort POR NOME\n\n");
+    // Ordenação por nome
     // Imprime o vetor antes
     printf("\n--- Vetor antes da ordenacao:\n\n");
     printVector(vector);
 
-    selectionSort(vector);
+    selectionSortNome(vector);
 
     // Imprime o vetor após
     printf("\n--- Vetor apos a ordenacao:\n\n");
     printVector(vector);
 
     printf("\n");
+
+    printf("*** SelectionSort POR SALARIO\n\n");
+    // Popula o vetor
+    dummyData(vector);
+    // Ordenação por Salário
+    // Imprime o vetor antes
+    printf("\n--- Vetor antes da ordenacao:\n\n");
+    printVector(vector);
+
+    selectionSortSalario(vector);
+
+    // Imprime o vetor após
+    printf("\n--- Vetor apos a ordenacao:\n\n");
+    printVector(vector);
+
+    printf("\n");
+
     return 0;
 }
 
 // Dummy Data
 int dummyData(DadosFuncionario vector[]){
     
-    strcpy(vector[0].nome,"R. J. Dio");
+    strcpy(vector[0].nome,"Ronnie Dio");
     vector[0].salario = 2000;
 
     strcpy(vector[1].nome,"Jeff Hanneman");
@@ -84,7 +105,7 @@ int dummyData(DadosFuncionario vector[]){
     strcpy(vector[8].nome,"Kerry King ");
     vector[8].salario = 78944;
 
-    strcpy(vector[8].nome,"Nina Hagen");
+    strcpy(vector[8].nome,"Zakk Wylde");
     vector[8].salario = 36885;
 
     strcpy(vector[9].nome,"Dave Lombardo");
@@ -115,9 +136,9 @@ int printVector(DadosFuncionario vet[])
     return 0;
 }
 
-// Função Selection Sort
+// Função Selection Sort usandoo salário como atributo
 // Recebe um vetor como parâmetro
-void selectionSort(DadosFuncionario vet[]) 
+void selectionSortSalario(DadosFuncionario vet[]) 
 { 
     int minIndex;
     DadosFuncionario varAuxiliar;
@@ -137,3 +158,32 @@ void selectionSort(DadosFuncionario vet[])
 } 
 
 
+// Função Selection Sort usandoo Nome como atributo
+// Recebe um vetor como parâmetro
+void selectionSortNome(DadosFuncionario arr[]) 
+{ 
+    DadosFuncionario min_idx;
+    char minStr[stringSize];
+
+    for (int i = 0; i < vectorSize-1; i++) 
+    { 
+        int min_idx = i; 
+        strcpy(minStr, arr[i].nome); 
+        for (int j = i+1; j < vectorSize; j++) 
+        { 
+            if (strcmp(minStr, arr[j].nome) > 0) 
+            { 
+                strcpy(minStr, arr[j].nome); 
+                min_idx = j; 
+            } 
+        }   
+        // Troca 
+        if (min_idx != i) 
+        { 
+            DadosFuncionario temp;
+            temp = arr[i];
+            arr[i] = arr[min_idx];
+            arr[min_idx] = temp;           
+        } 
+    } 
+} 
