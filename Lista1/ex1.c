@@ -31,7 +31,7 @@ int main()
     printf("\nDigite um valor para pesquisar: ");
     scanf("%d", &searchValue);
 
-    // Imprim
+    // Imprime o vetor lido
     printVector(vector);
 
     // Chamada da pesquisa sequencial
@@ -82,3 +82,4 @@ int linearSearch(int v[], int value)
     // Valor não encontrado
     return -1;
 }
+
