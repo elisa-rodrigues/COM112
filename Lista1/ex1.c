@@ -13,7 +13,7 @@
 // Protótipos de função
 int readVector(int vet[]);
 int printVector(int vet[]);
-int linearSearch(int v[], int value);
+int linearSearch(int v[], int n,int value);
 
 int main()
 {
@@ -35,13 +35,16 @@ int main()
     printVector(vector);
 
     // Chamada da pesquisa sequencial
-    index = linearSearch(vector, searchValue);
+    index = linearSearch(vector, vectorSize, searchValue);
+    
+    // Imprime o número de comparações executadas para encontrar o valor procurado no vetor
+    printf("\n\n --Número de comparações = %d", index);
 
     // Tratamento do retorno da Pesquisa Sequencial
-    if (index == -1)    
+    if (index == vectorSize)    
         printf("\n\n --Valor nao encontrado no vetor!");    
     else    
-        printf("\n\n --Valor %d encontrado. Numero de comparacoes feitas: r[%d]", searchValue, index + 1);
+        printf("\n\n --Valor %d encontrado em Vetor[%d]", searchValue, index);
     
     printf("\n");
     return 0;
@@ -72,14 +75,22 @@ int printVector(int vet[])
 
 // Função de Busca Sequencial
 // Recebe um vetor e um valor de pesquisa como parâmetros
-int linearSearch(int v[], int value)
+int linearSearch(int v[], int n, int value)
 {
-    for (int i = 0; i < vectorSize; i++)
+    int i;
+    
+    for (i = 0; i < n; i++)
     {
         if (v[i] == value)
-            return i;
+        {
+            // Quando a chave é encontrada, houve (i+1) comparações (posição da chave no vetor acrescida de um)
+            // No MELHOR CASO a chave estará na primeira posição do vetor (1 comparação) => T(n) = 1
+            return i+1;  
+        }
     }
-    // Valor não encontrado
-    return -1;
+    
+    // Quando a chave NÃO é encontrada, houve i comparações (total de elementos do vetor)
+    // No PIOR CASO a chave não existe ou é o último elemento do vetor (n comparações) => T(n) = n
+    return i; 
 }
 
