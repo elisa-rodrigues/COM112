@@ -41,7 +41,7 @@ int main()
     if (index == -1)    
         printf("\n\n --Valor nao encontrado no vetor!");    
     else    
-        printf("\n\n --Valor %d encontrado em Vetor[%d]", searchValue, index + 1);
+        printf("\n\n --Valor %d encontrado. Numero de comparacoes feitas: r[%d]", searchValue, index + 1);
     
     printf("\n");
     return 0;
